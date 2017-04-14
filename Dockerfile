@@ -4,8 +4,7 @@ RUN echo "http://nl.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositorie
 
 RUN apk add --no-cache \
     gmp \
-    libffi \
-    make
+    libffi
 
 RUN mkdir -p /pandoc-build
 WORKDIR /pandoc-build
