@@ -1,6 +1,6 @@
 FROM alpine:3.5
 
-RUN echo "http://nl.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
+RUN echo "http://nl.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
 
 RUN apk add --no-cache \
     gmp \
