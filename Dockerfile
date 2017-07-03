@@ -13,7 +13,7 @@ ENV PANDOC_VERSION 1.19.2.1
 ENV PANDOC_DOWNLOAD_URL https://hackage.haskell.org/package/pandoc-$PANDOC_VERSION/pandoc-$PANDOC_VERSION.tar.gz
 ENV PANDOC_ROOT /usr/local/pandoc
 
-RUN apk add --no-cache \
+RUN apk add --no-cache --virtual build-dependencies \
     ghc \
     cabal \
     linux-headers \
@@ -27,13 +27,7 @@ RUN apk add --no-cache \
     && cabal copy \
     && cd .. ) \
  && rm -Rf pandoc-$PANDOC_VERSION/ \
- && apk del --no-cache --purge \
-    ghc \
-    cabal \
-    linux-headers \
-    musl-dev \
-    zlib-dev \
-    curl \
+ && apk del build-dependencies \
  && rm -Rf /root/.cabal/ /root/.ghc/
 
 ENV PATH $PATH:$PANDOC_ROOT/bin
