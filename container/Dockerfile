@@ -1,14 +1,13 @@
 FROM alpine:3.5
 
-RUN apk add --no-cache \
-    gmp \
-    libffi
-
 ENV PANDOC_VERSION 1.19.2.1
 ENV PANDOC_DOWNLOAD_URL https://hackage.haskell.org/package/pandoc-$PANDOC_VERSION/pandoc-$PANDOC_VERSION.tar.gz
 ENV PANDOC_ROOT /usr/local/pandoc
 
-RUN apk add --no-cache --virtual build-dependencies \
+RUN apk add --no-cache \
+    gmp \
+    libffi \
+ && apk add --no-cache --virtual build-dependencies \
     --repository "http://nl.alpinelinux.org/alpine/edge/community" \
     ghc \
     cabal \
