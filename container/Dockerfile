@@ -1,7 +1,7 @@
-FROM alpine:3.5
+FROM alpine:3.6
 
-ENV PANDOC_VERSION 1.19.2.1
-ENV PANDOC_DOWNLOAD_URL https://hackage.haskell.org/package/pandoc-$PANDOC_VERSION/pandoc-$PANDOC_VERSION.tar.gz
+ENV PANDOC_VERSION 2.0.2
+ENV PANDOC_DOWNLOAD_URL https://github.com/jgm/pandoc/archive/$PANDOC_VERSION.tar.gz
 ENV PANDOC_ROOT /usr/local/pandoc
 
 RUN apk add --no-cache \
