@@ -23,7 +23,7 @@ RUN apk add --no-cache \
     && cabal copy \
     && cd .. ) \
  && rm -Rf pandoc-$PANDOC_VERSION/ \
- && apk del build-dependencies \
+ && apk del --purge build-dependencies \
  && rm -Rf /root/.cabal/ /root/.ghc/ \
  && cd / && rm -Rf /pandoc-build
 
