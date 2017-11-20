@@ -4,9 +4,6 @@ RUN apk add --no-cache \
     gmp \
     libffi
 
-RUN mkdir -p /pandoc-build
-WORKDIR /pandoc-build
-
 ENV PANDOC_VERSION 1.19.2.1
 ENV PANDOC_DOWNLOAD_URL https://hackage.haskell.org/package/pandoc-$PANDOC_VERSION/pandoc-$PANDOC_VERSION.tar.gz
 ENV PANDOC_ROOT /usr/local/pandoc
@@ -19,6 +16,7 @@ RUN apk add --no-cache --virtual build-dependencies \
     musl-dev \
     zlib-dev \
     curl \
+ && mkdir -p /pandoc-build && cd /pandoc-build \
  && curl -fsSL "$PANDOC_DOWNLOAD_URL" | tar -xzf - \
  && ( cd pandoc-$PANDOC_VERSION && cabal update && cabal install --only-dependencies \
     && cabal configure --prefix=$PANDOC_ROOT \
@@ -27,9 +25,7 @@ RUN apk add --no-cache --virtual build-dependencies \
     && cd .. ) \
  && rm -Rf pandoc-$PANDOC_VERSION/ \
  && apk del build-dependencies \
- && rm -Rf /root/.cabal/ /root/.ghc/
+ && rm -Rf /root/.cabal/ /root/.ghc/ \
+ && cd / && rm -Rf /pandoc-build
 
 ENV PATH $PATH:$PANDOC_ROOT/bin
-
-WORKDIR /
-RUN rmdir /pandoc-build
