@@ -1,7 +1,5 @@
 FROM alpine:3.5
 
-RUN echo "http://nl.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
-
 RUN apk add --no-cache \
     gmp \
     libffi
@@ -14,6 +12,7 @@ ENV PANDOC_DOWNLOAD_URL https://hackage.haskell.org/package/pandoc-$PANDOC_VERSI
 ENV PANDOC_ROOT /usr/local/pandoc
 
 RUN apk add --no-cache --virtual build-dependencies \
+    --repository "http://nl.alpinelinux.org/alpine/edge/community" \
     ghc \
     cabal \
     linux-headers \
